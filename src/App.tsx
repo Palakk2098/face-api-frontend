@@ -9,6 +9,13 @@ const App: React.FC = () => {
   return (
     <div style={{ textAlign: 'center', margin: '2rem' }}>
       <ToastContainer position="top-right" autoClose={3000} />
+
+      <img
+        src="face-recognition-logo.jpeg"
+        alt="face-app-logo"
+        className="rounded-image"
+      />
+
       <h1>Face Recognition App</h1>
       <AddFace />
       <RecognizeFace />

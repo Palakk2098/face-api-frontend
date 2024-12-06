@@ -18,6 +18,10 @@ const RecognizeFace: React.FC = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const selectedFile = e.target.files[0];
+      if (!selectedFile.type.includes('image/')) {
+        toast.error('Only image type files are allowed.');
+        return;
+      }
       setFile(selectedFile);
       setPreview(URL.createObjectURL(selectedFile)); // Generate a preview URL
     }

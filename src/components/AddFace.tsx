@@ -11,10 +11,24 @@ const FaceUpload = () => {
   // Handle file selection
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
+      if (event.target.files.length > 5) {
+        toast.error('Maximum 5 files are allowed');
+        return;
+      }
       const selectedFiles = Array.from(event.target.files);
 
       // Generate preview URLs
-      const previews = selectedFiles.map((file) => URL.createObjectURL(file));
+      const previews: string[] = [];
+      selectedFiles.map((file) => {
+        const selectedFile = file;
+        console.log(selectedFile.type, 'type');
+        if (!selectedFile.type.includes('image/')) {
+          toast.error('Only image type files are allowed.');
+        } else {
+          previews.push(URL.createObjectURL(file));
+        }
+        return file;
+      });
 
       setFiles(selectedFiles);
       setPreviews(previews);
